@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="310.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyectofinal.viewController.LogInViewController">
+   <children>
+      <Label layoutX="133.0" layoutY="14.0" text="Iniciar Sesión" textFill="#008cff">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
+      <Label layoutX="71.0" layoutY="95.0" prefHeight="19.0" prefWidth="61.0" text="Usuario">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUsuario" layoutX="166.0" layoutY="95.0" prefHeight="25.0" prefWidth="169.0" />
+      <Label layoutX="71.0" layoutY="155.0" prefHeight="21.0" prefWidth="84.0" text="Contraseña">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtContraseña" layoutX="166.0" layoutY="155.0" prefHeight="25.0" prefWidth="169.0" />
+      <Button fx:id="btnIngresar" layoutX="200.0" layoutY="206.0" mnemonicParsing="false" text="Ingresar" textFill="#008cff">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label layoutX="146.0" layoutY="258.0" text="No tiene cuenta? ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="btnRegistro" layoutX="259.0" layoutY="255.0" text="Registrese">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>
