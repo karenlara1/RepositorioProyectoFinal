@@ -6,7 +6,7 @@ public class Vendedor extends Persona{
         super(builder);
     }
 
-    public static class VendedorBuilder extends PersonaBuilder<VendedorBuilder>{
+    public static class VendedorBuilder extends PersonaBuilder {
 
         @Override
         public Vendedor build(){
@@ -18,4 +18,15 @@ public class Vendedor extends Persona{
         return new VendedorBuilder();
     }
 
+    @Override
+    public String toString() {
+        return "Vendedor{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", cedula='" + cedula + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", usuario=" + usuario +
+                '}';
+
+    }
 }

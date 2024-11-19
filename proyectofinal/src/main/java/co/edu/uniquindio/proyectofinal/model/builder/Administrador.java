@@ -6,7 +6,7 @@ public class Administrador extends Persona{
         super(builder);
     }
 
-    public static class AdministradorBuilder extends PersonaBuilder<AdministradorBuilder>{
+    public static class AdministradorBuilder extends PersonaBuilder {
 
         @Override
         public Administrador build() {

@@ -26,7 +26,21 @@ public class Usuario {
         return persona;
     }
 
-    public boolean autenticar(String contrasena){
-        return this.contrasena.equals(contrasena);
+    public void setPersona (Persona persona){
+        this.persona = persona;
+        if (persona != null && persona.getUsuario() != this) {
+            persona.setUsuario (this);
+        }
+
     }
+
+    public String toString(){
+
+        return "Usuario{" +
+                "username='" + usuario + '\'' +
+                ", password='" + contrasena + '\'' +
+                (persona != null ? ", persona=" + persona.getNombre() + " " + persona.getApellido() : "") +
+                '}';
+    }
+
 }

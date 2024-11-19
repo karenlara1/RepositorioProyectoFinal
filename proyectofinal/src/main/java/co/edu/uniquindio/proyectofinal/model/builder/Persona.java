@@ -3,17 +3,18 @@ package co.edu.uniquindio.proyectofinal.model.builder;
 import co.edu.uniquindio.proyectofinal.model.Usuario;
 
 public class Persona {
+
     /*
-    Se deben crear los atributos protegidos para que las clases que hereden puedan acceder
-    directamente
-     */
+        Se deben crear los atributos protegidos para que las clases que hereden puedan acceder
+        directamente
+         */
     protected String nombre;
     protected String apellido;
     protected String cedula;
     protected String direccion;
     protected Usuario usuario;
 
-    protected Persona (PersonaBuilder<?> builder) {
+    protected Persona (PersonaBuilder builder) {
         this.nombre = builder.nombre;
         this.apellido = builder.apellido;
         this.cedula = builder.cedula;
@@ -21,10 +22,26 @@ public class Persona {
         this.usuario =  builder.usuario;
     }
 
+    public Usuario getUsuario(){
+        return usuario;
+    }
+
+    public void setUsuario (Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
     /**
      * Se crea el Builder estatico
      */
-    public static class PersonaBuilder <T extends PersonaBuilder<T>>{
+    public static class PersonaBuilder {
 
         protected String nombre;
         protected String apellido;
@@ -32,40 +49,41 @@ public class Persona {
         protected String direccion;
         protected Usuario usuario;
 
-        public T nombre (String nombre){
+        public PersonaBuilder nombre (String nombre){
             this.nombre= nombre;
-            return (T) this;
+            return this;
         }
 
-        public T apellido (String apellido) {
+        public PersonaBuilder apellido (String apellido) {
             this.apellido = apellido;
-            return (T) this;
+            return this;
         }
 
-        public T cedula (String cedula){
+        public PersonaBuilder cedula (String cedula){
             this.cedula = cedula;
-            return (T) this;
+            return this;
         }
 
-        public T direccion (String direccion){
+        public PersonaBuilder direccion (String direccion){
             this.direccion = direccion;
-            return (T) this;
-        }
-
-        public T usuario (Usuario usuario){
-            this.usuario = usuario;
-            return (T) this;
+            return this;
         }
 
         public Persona build(){
             return new Persona(this);
         }
-    }
-    /*
-    Método que obtiene la nueva instancia del builder
-     */
-    public static PersonaBuilder<?> builder() {
-        return new PersonaBuilder<>();
+
+        @Override
+        public String toString() {
+            return "Persona{" +
+                    "nombre='" + nombre + '\'' +
+                    ", apellido='" + apellido + '\'' +
+                    ", cedula='" + cedula + '\'' +
+                    ", direccion='" + direccion + '\'' +
+                    (usuario != null ? ", usuario=" + usuario.getUsuario() : "") +
+                    '}';
+        }
+
 
     }
 
