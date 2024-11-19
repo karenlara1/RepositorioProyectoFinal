@@ -15,8 +15,6 @@ public class Producto {
     private LocalDateTime fechaHoraPublicacion;
     private List<Comentario> comentarios;
 
-    public Producto() {
-    }
 
     public Producto(String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto, LocalDateTime fechaHoraPublicacion, List<Comentario> comentarios) {
         this.nombre = nombre;
