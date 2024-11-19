@@ -1,16 +1,16 @@
 package co.edu.uniquindio.proyectofinal.model;
 
-import co.edu.uniquindio.proyectofinal.model.builder.Vendedor;
+import co.edu.uniquindio.proyectofinal.model.builder.VendedorBuilder;
 
 import java.time.LocalDateTime;
 
 public class Comentario {
     private String contenido;
-    private Vendedor autor; // Referencia a la clase Vendedor
+    private VendedorBuilder autor; // Referencia a la clase vendedorBuilder
     private Producto producto; // Producto asociado al comentario
     private LocalDateTime fechaHora; // Fecha y hora del comentario
 
-    public Comentario(String contenido, Vendedor autor, Producto producto, LocalDateTime fechaHora) {
+    public Comentario(String contenido, VendedorBuilder autor, Producto producto, LocalDateTime fechaHora) {
         this.contenido = contenido;
         this.autor = autor;
         this.producto = producto;
@@ -26,11 +26,11 @@ public class Comentario {
         this.contenido = contenido;
     }
 
-    public Vendedor getAutor() {
+    public VendedorBuilder getAutor() {
         return autor;
     }
 
-    public void setAutor(Vendedor autor) {
+    public void setAutor(VendedorBuilder autor) {
         this.autor = autor;
     }
 

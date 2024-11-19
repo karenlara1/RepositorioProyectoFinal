@@ -1,18 +1,35 @@
 package co.edu.uniquindio.proyectofinal.model;
 
+import co.edu.uniquindio.proyectofinal.model.builder.ProductoBuilder;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Producto {
     private String nombre;
     private String imagen;
     private String categoria;
     private double precio;
     private EstadoProducto estadoProducto;
+    private LocalDateTime fechaHoraPublicacion;
+    private List<Comentario> comentarios;
 
-    public Producto(String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto) {
+    public Producto() {
+    }
+
+    public Producto(String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto, LocalDateTime fechaHoraPublicacion, List<Comentario> comentarios) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.categoria = categoria;
         this.precio = precio;
         this.estadoProducto = estadoProducto;
+        this.fechaHoraPublicacion = fechaHoraPublicacion;
+        this.comentarios = new ArrayList<>();
+    }
+
+    public static ProductoBuilder builder() {
+        return new ProductoBuilder();
     }
 
     public String getNombre() {
@@ -55,5 +72,34 @@ public class Producto {
         this.estadoProducto = estadoProducto;
     }
 
+    public LocalDateTime getFechaHoraPublicacion() {
+        return fechaHoraPublicacion;
+    }
+
+    public void setFechaHoraPublicacion(LocalDateTime fechaPublicacion) {
+        this.fechaHoraPublicacion = fechaHoraPublicacion;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void agregarComentario(Comentario comentario) {
+        this.comentarios.add(comentario);
+    }
+
     public void cambiarEstado(){}
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre='" + nombre + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", precio=" + precio +
+                ", estadoProducto=" + estadoProducto +
+                ", fechaHoraPublicacion=" + fechaHoraPublicacion +
+                ", comentarios=" + comentarios +
+                '}';
+    }
 }

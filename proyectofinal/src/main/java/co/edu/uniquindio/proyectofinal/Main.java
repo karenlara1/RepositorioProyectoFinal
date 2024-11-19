@@ -2,15 +2,14 @@ package co.edu.uniquindio.proyectofinal;
 
 
 import co.edu.uniquindio.proyectofinal.model.Usuario;
-import co.edu.uniquindio.proyectofinal.model.builder.Administrador;
 import co.edu.uniquindio.proyectofinal.model.builder.Persona;
-import co.edu.uniquindio.proyectofinal.model.builder.Vendedor;
+import co.edu.uniquindio.proyectofinal.model.builder.VendedorBuilder;
 
 public class Main {
 
         public static void main(String[] args){
 
-            Persona vendedor = Vendedor.builder()
+            Persona vendedor = VendedorBuilder.builder()
                     .nombre("nombre")
                     .apellido("apellido")
                     .cedula("12345")
