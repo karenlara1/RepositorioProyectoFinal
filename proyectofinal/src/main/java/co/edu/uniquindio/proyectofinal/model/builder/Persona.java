@@ -38,6 +38,10 @@ public class Persona {
         return apellido;
     }
 
+    public String getCedula() { return cedula; }
+
+    public String getDireccion() { return direccion; }
+
     /**
      * Se crea el Builder estatico
      */

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Producto {
+    private String idProducto;
     private String nombre;
     private String imagen;
     private String categoria;
@@ -16,7 +17,8 @@ public class Producto {
     private List<Comentario> comentarios;
 
 
-    public Producto(String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto, LocalDateTime fechaHoraPublicacion, List<Comentario> comentarios) {
+    public Producto(String idProducto, String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto, LocalDateTime fechaHoraPublicacion, List<Comentario> comentarios) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
         this.imagen = imagen;
         this.categoria = categoria;
@@ -29,6 +31,10 @@ public class Producto {
     public static ProductoBuilder builder() {
         return new ProductoBuilder();
     }
+
+    public String getIdProducto() { return idProducto; }
+
+    public void setIdProducto(String idProducto) { this.idProducto = idProducto; }
 
     public String getNombre() {
         return nombre;
@@ -91,7 +97,8 @@ public class Producto {
     @Override
     public String toString() {
         return "Producto{" +
-                "nombre='" + nombre + '\'' +
+                "idProducto='" + idProducto + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", imagen='" + imagen + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", precio=" + precio +

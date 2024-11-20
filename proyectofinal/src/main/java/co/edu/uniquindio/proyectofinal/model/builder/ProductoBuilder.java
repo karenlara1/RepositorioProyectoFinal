@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ProductoBuilder {
+    protected String idProducto;
     protected String nombre;
     protected String imagen;
     protected String categoria;
@@ -16,6 +17,10 @@ public class ProductoBuilder {
     protected LocalDateTime fechaPublicacion;
     protected List<Comentario> comentarios;
 
+    public ProductoBuilder idProducto(String idProducto) {
+        this.idProducto = idProducto;
+        return this;
+    }
     public ProductoBuilder nombre(String nombre) {
         this.nombre = nombre;
         return this;
@@ -51,5 +56,5 @@ public class ProductoBuilder {
         return this;
     }
 
-    public Producto build(){ return new Producto(nombre, imagen, categoria, precio, estadoProducto, fechaPublicacion, comentarios); }
+    public Producto build(){ return new Producto(idProducto, nombre, imagen, categoria, precio, estadoProducto, fechaPublicacion, comentarios); }
 }
