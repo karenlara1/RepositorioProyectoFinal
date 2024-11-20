@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyectofinal.model;
 
 import co.edu.uniquindio.proyectofinal.model.builder.ComentarioBuilder;
-import co.edu.uniquindio.proyectofinal.model.builder.VendedorBuilder;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

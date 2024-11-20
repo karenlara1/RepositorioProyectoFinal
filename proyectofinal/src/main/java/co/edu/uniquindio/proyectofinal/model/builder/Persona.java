@@ -14,7 +14,7 @@ public class Persona {
     protected String direccion;
     protected Usuario usuario;
 
-    protected Persona (PersonaBuilder builder) {
+    protected Persona (PersonaBuilder<?> builder) {
         this.nombre = builder.nombre;
         this.apellido = builder.apellido;
         this.cedula = builder.cedula;
@@ -41,7 +41,7 @@ public class Persona {
     /**
      * Se crea el Builder estatico
      */
-    public static class PersonaBuilder {
+    public static class PersonaBuilder <T extends PersonaBuilder<T>> {
 
         protected String nombre;
         protected String apellido;
@@ -49,24 +49,24 @@ public class Persona {
         protected String direccion;
         protected Usuario usuario;
 
-        public PersonaBuilder nombre (String nombre){
+        public T nombre (String nombre){
             this.nombre= nombre;
-            return this;
+            return (T) this;
         }
 
         public PersonaBuilder apellido (String apellido) {
             this.apellido = apellido;
-            return this;
+            return (T) this;
         }
 
-        public PersonaBuilder cedula (String cedula){
+        public T cedula (String cedula){
             this.cedula = cedula;
-            return this;
+            return (T) this;
         }
 
-        public PersonaBuilder direccion (String direccion){
+        public T direccion (String direccion){
             this.direccion = direccion;
-            return this;
+            return (T) this;
         }
 
         public Persona build(){
