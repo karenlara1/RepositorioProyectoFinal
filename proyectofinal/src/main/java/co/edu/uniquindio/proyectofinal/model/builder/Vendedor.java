@@ -5,7 +5,8 @@ public class Vendedor extends Persona {
     protected Vendedor(VendedorBuilder builder){
         super(builder);
     }
-    public static class VendedorBuilder extends PersonaBuilder<VendedorBuilder> {
+
+    public static class VendedorBuilder extends PersonaBuilder {
 
         @Override
         public Vendedor build (){

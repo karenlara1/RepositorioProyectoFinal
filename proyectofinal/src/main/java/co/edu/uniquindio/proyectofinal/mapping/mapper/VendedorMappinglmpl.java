@@ -32,7 +32,9 @@ public class VendedorMappinglmpl implements IVendedorMapping {
 
     @Override
     public Vendedor vendedorDtoToVendedor(VendedorDto dto) {
-        return Vendedor.builder()
+        return Vendedor.build()
+
+
     }
 
 }
