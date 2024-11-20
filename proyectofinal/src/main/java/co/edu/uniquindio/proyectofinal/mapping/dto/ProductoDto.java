@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record ProductoDto(
+        String idProducto,
         String nombre,
         String imagen,
         String categoria,

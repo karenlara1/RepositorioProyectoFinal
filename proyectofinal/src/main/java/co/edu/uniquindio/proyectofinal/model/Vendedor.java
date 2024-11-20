@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyectofinal.model;
 
 import co.edu.uniquindio.proyectofinal.model.builder.Persona;
+import co.edu.uniquindio.proyectofinal.model.builder.ProductoBuilder;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public class Vendedor extends Persona {
     public List<Producto> getProductos() {
         return productos;
     }
+
+    public static ProductoBuilder builder() { return new ProductoBuilder(); }
 
     public void setProductos(List<Producto> productos) {
         this.productos = productos;

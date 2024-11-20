@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyectofinal.model.builder;
 
+import co.edu.uniquindio.proyectofinal.model.Producto;
 import co.edu.uniquindio.proyectofinal.model.Usuario;
+
+import java.util.List;
 
 public class Persona {
 
@@ -13,13 +16,15 @@ public class Persona {
     protected String cedula;
     protected String direccion;
     protected Usuario usuario;
+    protected List<Producto> listProductos;
 
-    protected Persona (PersonaBuilder<?> builder) {
+    protected Persona (PersonaBuilder builder) {
         this.nombre = builder.nombre;
         this.apellido = builder.apellido;
         this.cedula = builder.cedula;
         this.direccion = builder.direccion;
         this.usuario =  builder.usuario;
+        this.listProductos = builder.listProductos;
     }
 
     public Usuario getUsuario(){
@@ -42,40 +47,58 @@ public class Persona {
 
     public String getDireccion() { return direccion; }
 
+    public List<Producto> getListProductos() { return listProductos; }
+
     /**
      * Se crea el Builder estatico
      */
-    public static class PersonaBuilder <T extends PersonaBuilder<T>> {
+    public static class PersonaBuilder {
 
         protected String nombre;
         protected String apellido;
         protected String cedula;
         protected String direccion;
         protected Usuario usuario;
+        protected List<Producto> listProductos;
 
-        public T nombre (String nombre){
+        public PersonaBuilder nombre (String nombre){
             this.nombre= nombre;
-            return (T) this;
+            return this;
         }
 
         public PersonaBuilder apellido (String apellido) {
             this.apellido = apellido;
-            return (T) this;
+            return this;
         }
 
-        public T cedula (String cedula){
+        public PersonaBuilder cedula (String cedula){
             this.cedula = cedula;
-            return (T) this;
+            return this;
         }
 
-        public T direccion (String direccion){
+        public PersonaBuilder direccion (String direccion){
             this.direccion = direccion;
-            return (T) this;
+            return this;
+        }
+
+        public PersonaBuilder usuario (Usuario usuario){
+            this.usuario = usuario;
+            return this;
+        }
+
+        public PersonaBuilder listProductos (List<Producto> listProductos){
+            this.listProductos = listProductos;
+            return this;
         }
 
         public Persona build(){
             return new Persona(this);
         }
+
+        protected PersonaBuilder thisBuilder() {
+            return (PersonaBuilder)this;
+        }
+
 
         @Override
         public String toString() {
