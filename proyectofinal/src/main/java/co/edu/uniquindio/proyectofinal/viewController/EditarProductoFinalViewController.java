@@ -7,16 +7,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class AgregarProductoViewController {
+public class EditarProductoFinalViewController {
 
     @FXML
-    private Button btnAgregar;
+    private Button btnCambiarFoto;
 
     @FXML
     private Button btnCancelarAgregarProducto;
 
     @FXML
-    private Button btnSubirFoto;
+    private Button btnGuardar;
 
     @FXML
     private ImageView fotoProducto;
@@ -34,12 +34,17 @@ public class AgregarProductoViewController {
     private TextField txtPrecioProducto;
 
     @FXML
-    void agregarProducto(ActionEvent event) {
+    void cambiarImagen(ActionEvent event) {
 
     }
 
     @FXML
-    void subirImagen(ActionEvent event) {
+    void cancelar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void guardarProducto(ActionEvent event) {
 
     }
 
