@@ -1,77 +1,140 @@
 package co.edu.uniquindio.proyectofinal.factory;
 
+import co.edu.uniquindio.proyectofinal.mapping.dto.ComentarioDto;
+import co.edu.uniquindio.proyectofinal.mapping.dto.ProductoDto;
+import co.edu.uniquindio.proyectofinal.mapping.dto.VendedorDto;
+import co.edu.uniquindio.proyectofinal.mapping.mapper.MarketPlaceMappinglmpl;
+import co.edu.uniquindio.proyectofinal.model.Comentario;
+import co.edu.uniquindio.proyectofinal.model.MarketPlace;
+import co.edu.uniquindio.proyectofinal.model.Producto;
 import co.edu.uniquindio.proyectofinal.model.Vendedor;
+import co.edu.uniquindio.proyectofinal.service.IModelFactoryService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class Marketplace {
-    private List<Vendedor> vendedores; // Lista de todos los vendedores
+public class ModelFactory  implements IModelFactoryService {
+    private static ModelFactory instance;
+    MarketPlace marketPlace;
+    MarketPlaceMappinglmpl mapper;
 
-    public Marketplace() {
-        this.vendedores = new ArrayList<>();
-    }
-
-    // Métodos de gestión de vendedores
-    public boolean agregarVendedor(Vendedor vendedor) {
-        if (!vendedores.contains(vendedor)) {
-            vendedores.add(vendedor);
-            return true;
+    public static ModelFactory getInstance() {
+        if (instance == null) {
+            instance = new ModelFactory();
         }
-        return false;
+        return instance;
     }
 
-    public boolean establecerAlianza(Vendedor vendedor1, Vendedor vendedor2) {
-        if (vendedor1 != null && vendedor2 != null && !vendedor1.equals(vendedor2)) {
-            vendedor1.agregarContacto(vendedor2);
-            vendedor2.agregarContacto(vendedor1);
-            return true;
-        }
-        return false;
-    }
-
-    // Métodos de gestión de productos
-    public boolean agregarProducto(String usuario, Producto producto) {
-        Optional<Vendedor> vendedor = buscarVendedorPorUsuario(usuario);
-        if (vendedor.isPresent()) {
-            vendedor.get().agregarProducto(producto);
-            return true;
-        }
-        return false;
-    }
-
-    public List<Producto> listarProductosDeRed(Vendedor vendedor) {
-        List<Producto> productos = new ArrayList<>();
-        vendedor.getContactos().forEach(contacto -> productos.addAll(contacto.getProductos()));
-        productos.addAll(vendedor.getProductos());
-        return productos;
-    }
-
-    // Métodos de gestión de comentarios
-    public boolean agregarComentario(String productoId, Comentario comentario) {
-        for (Vendedor vendedor : vendedores) {
-            Optional<Producto> producto = vendedor.getProductos().stream()
-                    .filter(p -> p.getId().equals(productoId))
-                    .findFirst();
-            if (producto.isPresent()) {
-                producto.get().agregarComentario(comentario);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Estadísticas y reportes
-    public void generarReporteEstadisticas() {
-        // Implementación para generar un reporte con estadísticas
+    private ModelFactory() {
+        mapper = new MarketPlaceMappinglmpl();
+        marketPlace = inicializarDatos();
     }
 
     @Override
-    public String toString() {
-        return "MarketplaceManager{" +
-                "vendedores=" + vendedores +
-                '}';
+    public List<ProductoDto> getProductosDto() { return mapper.getProductosDto(getMarketPlace().getListProductos()); }
+
+    @Override
+    public boolean agregarProducto(ProductoDto productoDto) {
+        if(getMarketPlace().verificarProductoExistente(productoDto.idProducto())) {
+            Producto newProducto = mapper.productoDtoToProducto(productoDto);
+
+            getMarketPlace().crearProducto(newProducto);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean actualizarProducto(String idActual, ProductoDto productoDto) {
+        if(!getMarketPlace().verificarProductoExistente(idActual)) {
+            Producto newProducto = mapper.productoDtoToProducto(productoDto);
+
+            getMarketPlace().actualizarProducto(idActual, newProducto);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean eliminarProducto(String idProducto) {
+        return getMarketPlace().eliminarProducto(idProducto);
+
+    }
+
+    @Override
+    public List<VendedorDto> getVendedoresDto() { return mapper.getVendedoresDto(getMarketPlace().getListVendedores()); }
+
+    @Override
+    public boolean agregarVendedor(VendedorDto vendedorDto) {
+        if(getMarketPlace().verificarComentarioExistente(vendedorDto.usuario().getUsuario())) {
+            Vendedor newVendedor = mapper.vendedorDtoToVendedor(vendedorDto);
+
+            getMarketPlace().crearVendedor(newVendedor);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean actualizarVendedor(String usuario, VendedorDto vendedorDto) {
+        if(!getMarketPlace().verificarVendedorExistente(usuario)) {
+            Vendedor newVendedor = mapper.vendedorDtoToVendedor(vendedorDto);
+
+            getMarketPlace().actualizarVendedor(usuario, newVendedor);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean eliminarVendedor(String usuario) {
+        return getMarketPlace().eliminarVendedor(usuario);
+    }
+
+    @Override
+    public List<ComentarioDto> getComentariosDto() { return mapper.getComentariosDto(getMarketPlace().getListComentarios()); }
+
+    @Override
+    public boolean agregarComentario(ComentarioDto comentarioDto) {
+        if(getMarketPlace().verificarComentarioExistente(comentarioDto.contenido())) {
+            Comentario newComentario = mapper.comentarioDtoToComentario(comentarioDto);
+
+            getMarketPlace().crearComentario(newComentario);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean actualizarComentario(String contenido, ComentarioDto comentarioDto) {
+        if(!getMarketPlace().verificarComentarioExistente(contenido)) {
+            Comentario newComentario = mapper.comentarioDtoToComentario(comentarioDto);
+
+            getMarketPlace().actualizarComentario(newComentario, contenido);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean eliminarComentario(String contenido) {
+        return getMarketPlace().eliminarComentario(contenido);
+    }
+
+
+
+
+
+
+    public static MarketPlace inicializarDatos() {
+        MarketPlace marketPlace = new MarketPlace();
+        return marketPlace;
+    }
+
+    public MarketPlace getMarketPlace() {
+        return marketPlace;
+    }
+
+    public void setMarketPlace(MarketPlace marketPlace) {
+        this.marketPlace = marketPlace;
     }
 }
-

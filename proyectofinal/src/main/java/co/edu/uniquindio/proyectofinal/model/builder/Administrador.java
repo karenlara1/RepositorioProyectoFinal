@@ -2,20 +2,19 @@ package co.edu.uniquindio.proyectofinal.model.builder;
 
 public class Administrador extends Persona {
 
-    protected Administrador(AdministradorBuilder builder) {
+    private Administrador(AdministradorBuilder builder) {
         super(builder);
     }
 
-    public static class AdministradorBuilder extends PersonaBuilder<AdministradorBuilder>{
+    public static class AdministradorBuilder extends PersonaBuilder {
 
         @Override
-        public Administrador build(){
+        protected AdministradorBuilder thisBuilder() {
+            return this;
+        }
+
+        public Administrador build() {
             return new Administrador(this);
         }
     }
-
-    public static AdministradorBuilder builder() {
-        return new AdministradorBuilder();
-    }
-
 }

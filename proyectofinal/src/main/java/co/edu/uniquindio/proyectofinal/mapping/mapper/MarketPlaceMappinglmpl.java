@@ -2,8 +2,10 @@ package co.edu.uniquindio.proyectofinal.mapping.mapper;
 
 import co.edu.uniquindio.proyectofinal.mapping.dto.ComentarioDto;
 import co.edu.uniquindio.proyectofinal.mapping.dto.ProductoDto;
+import co.edu.uniquindio.proyectofinal.mapping.dto.VendedorDto;
 import co.edu.uniquindio.proyectofinal.model.Comentario;
 import co.edu.uniquindio.proyectofinal.model.Producto;
+import co.edu.uniquindio.proyectofinal.model.Vendedor;
 import co.edu.uniquindio.proyectofinal.service.IMarketPlaceMapping;
 
 import java.util.ArrayList;
@@ -61,6 +63,7 @@ public class MarketPlaceMappinglmpl implements IMarketPlaceMapping {
     @Override
     public ProductoDto productoToProductoDto(Producto producto) {
         return new ProductoDto(
+                producto.getIdProducto(),
                 producto.getNombre(),
                 producto.getImagen(),
                 producto.getCategoria(),
@@ -84,6 +87,37 @@ public class MarketPlaceMappinglmpl implements IMarketPlaceMapping {
                 .build();
     }
 
+    @Override
+    public List<VendedorDto> getVendedoresDto(List<Vendedor> vendedores) {
+        if (vendedores == null){
+            return null;
+        }
 
+        List<VendedorDto> vendedoresDto = new ArrayList<>();
+        for (Vendedor vendedor : vendedores) {
+            vendedoresDto.add(vendedorToVendedorDto(vendedor));
+        }
+        return vendedoresDto;
+    }
+
+    @Override
+    public VendedorDto vendedorToVendedorDto(Vendedor vendedor) {
+        return new VendedorDto(
+                vendedor.getNombre(),
+                vendedor.getApellido(),
+                vendedor.getUsuario(),
+                vendedor.getProductos()
+        );
+    }
+
+    @Override
+    public Vendedor vendedorDtoToVendedor(VendedorDto vendedorDto) {
+        return (Vendedor) new co.edu.uniquindio.proyectofinal.model.builder.Vendedor.VendedorBuilder()
+                .nombre(vendedorDto.nombre())
+                .apellido(vendedorDto.apellido())
+                .usuario(vendedorDto.usuario())
+                .listProductos(vendedorDto.productos())
+                .build();
+    }
 
 }
