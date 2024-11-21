@@ -9,10 +9,12 @@ public class Vendedor extends Persona {
 
     private List<Producto> productos;
     private List<Vendedor> aliados;
+    private List<Vendedor> contactos;
     public Vendedor(PersonaBuilder builder) {
         super(builder);
         this.productos = productos;
         this.aliados = aliados;
+        this.contactos = contactos;
     }
 
     public List<Producto> getProductos() {
@@ -33,6 +35,10 @@ public class Vendedor extends Persona {
         this.aliados = aliados;
     }
 
+    public List<Vendedor> getContactos() { return contactos; }
+
+    public void setContactos(List<Vendedor> contactos) { this.contactos = contactos; }
+
     public boolean agregarAliado(Vendedor aliado) {
         if (!aliados.contains(aliado) && !this.equals(aliado)) {
             aliados.add(aliado);
@@ -49,5 +55,24 @@ public class Vendedor extends Persona {
             return true;
         }
         return false;
+    }
+
+    public boolean addContacto(Vendedor nuevoContacto) {
+        if (nuevoContacto == null) {
+            System.out.println("El contacto no puede ser nulo.");
+            return false;
+        }
+        if (contactos.contains(nuevoContacto)) {
+            System.out.println("El contacto ya existe en la lista.");
+            return false;
+        }
+
+        // Agregar el contacto a la lista
+        contactos.add(nuevoContacto);
+        // Agregar recíprocamente
+        nuevoContacto.getContactos().add(this);
+
+        System.out.println("Contacto agregado con éxito.");
+        return true;
     }
 }
