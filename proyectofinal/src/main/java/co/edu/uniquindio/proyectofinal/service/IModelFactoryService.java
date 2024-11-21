@@ -19,7 +19,7 @@ public interface IModelFactoryService {
 
     List<ComentarioDto> getComentariosDto();
     boolean agregarComentario(ComentarioDto comentarioDto);
-    boolean eliminarComentario(String contenido);
     boolean actualizarComentario(String contenido, ComentarioDto comentarioDto);
+    boolean eliminarComentarios(String contenido);
 
 }

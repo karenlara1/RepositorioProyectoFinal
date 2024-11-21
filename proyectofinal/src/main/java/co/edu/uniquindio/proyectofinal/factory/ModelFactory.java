@@ -4,12 +4,11 @@ import co.edu.uniquindio.proyectofinal.mapping.dto.ComentarioDto;
 import co.edu.uniquindio.proyectofinal.mapping.dto.ProductoDto;
 import co.edu.uniquindio.proyectofinal.mapping.dto.VendedorDto;
 import co.edu.uniquindio.proyectofinal.mapping.mapper.MarketPlaceMappinglmpl;
-import co.edu.uniquindio.proyectofinal.model.Comentario;
-import co.edu.uniquindio.proyectofinal.model.MarketPlace;
-import co.edu.uniquindio.proyectofinal.model.Producto;
-import co.edu.uniquindio.proyectofinal.model.Vendedor;
+import co.edu.uniquindio.proyectofinal.model.*;
 import co.edu.uniquindio.proyectofinal.service.IModelFactoryService;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactory  implements IModelFactoryService {
@@ -116,17 +115,133 @@ public class ModelFactory  implements IModelFactoryService {
     }
 
     @Override
-    public boolean eliminarComentario(String contenido) {
-        return getMarketPlace().eliminarComentario(contenido);
-    }
-
-
-
-
-
+    public boolean eliminarComentarios(String contenido) { return getInstance().eliminarComentarios(contenido); }
 
     public static MarketPlace inicializarDatos() {
         MarketPlace marketPlace = new MarketPlace();
+        marketPlace.setNombre("MarketPlace");
+
+        Usuario newUsuario = Usuario.builder()
+                .usuario("ZM")
+                .build();
+
+        Usuario newUsuario2 = Usuario.builder()
+                .usuario("ValenLeon")
+                .build();
+
+        Usuario newUsuario3 = Usuario.builder()
+                .usuario("Alex1210")
+                .build();
+
+        Vendedor vendedor = (Vendedor) new co.edu.uniquindio.proyectofinal.model.builder.Vendedor.VendedorBuilder()
+                .nombre("Mariana")
+                .apellido("Mejia")
+                .cedula("1090587415")
+                .direccion("La isabela")
+                .usuario(newUsuario)
+                .build();
+
+        Vendedor vendedor2 = (Vendedor) new co.edu.uniquindio.proyectofinal.model.builder.Vendedor.VendedorBuilder()
+                .nombre("Valentina")
+                .apellido("Leon")
+                .cedula("1090677415")
+                .direccion("La isabela")
+                .usuario(newUsuario2)
+                .build();
+
+        Vendedor vendedor3 = (Vendedor) new co.edu.uniquindio.proyectofinal.model.builder.Vendedor.VendedorBuilder()
+                .nombre("Alex David")
+                .apellido("Gutierrez")
+                .cedula("1090677499")
+                .direccion("La Fachada")
+                .usuario(newUsuario3)
+                .build();
+
+        Producto newProducto = Producto.builder()
+                .idProducto("1")
+                .nombre("Xbox")
+                .imagen("Imagen de xbox")
+                .categoria("Consola de videojuegos")
+                .precio(2000.0)
+                .estadoProducto(EstadoProducto.PUBLICADO)
+                .fechaPublicacion(LocalDateTime.now())
+                .vendedor(vendedor)
+                .build();
+
+        Producto newProducto2 = Producto.builder()
+                .idProducto("2")
+                .nombre("Iphone")
+                .imagen("Imagen de Iphone")
+                .categoria("Celular")
+                .precio(3000.0)
+                .estadoProducto(EstadoProducto.VENDIDO)
+                .fechaPublicacion(LocalDateTime.now())
+                .vendedor(vendedor2)
+                .build();
+
+        Producto newProducto3 = Producto.builder()
+                .idProducto("3")
+                .nombre("Portatil acer nitro 5")
+                .imagen("Imagen de portatil")
+                .categoria("Computador")
+                .precio(4000.0)
+                .estadoProducto(EstadoProducto.PUBLICADO)
+                .fechaPublicacion(LocalDateTime.now())
+                .vendedor(vendedor3)
+                .build();
+
+        Vendedor autorComentario = (Vendedor) new co.edu.uniquindio.proyectofinal.model.builder.Vendedor.VendedorBuilder()
+                .nombre("Mateo")
+                .apellido("Villegas")
+                .build();
+
+        Vendedor autorComentario2 = (Vendedor) new co.edu.uniquindio.proyectofinal.model.builder.Vendedor.VendedorBuilder()
+                .nombre("Ricardo")
+                .apellido("Herrera")
+                .build();
+
+        Vendedor autorComentario3 = (Vendedor) new co.edu.uniquindio.proyectofinal.model.builder.Vendedor.VendedorBuilder()
+                .nombre("Deivid Mateo")
+                .apellido("Cañan")
+                .build();
+
+        Comentario newComentario = Comentario.builder()
+                .contenido("¿Cuanto tiempo de uso tiene?")
+                .autor(autorComentario)
+                .producto(newProducto)
+                .fechaHora(LocalDateTime.now().plusHours(2))
+                .meGustas(new ArrayList<>())
+                .build();
+
+        Comentario newComentario2 = Comentario.builder()
+                .contenido("Muy buen producto?")
+                .autor(autorComentario2)
+                .producto(newProducto2)
+                .fechaHora(LocalDateTime.now().plusHours(1))
+                .meGustas(new ArrayList<>())
+                .build();
+
+        Comentario newComentario3 = Comentario.builder()
+                .contenido("Muy buen producto?")
+                .autor(autorComentario3)
+                .producto(newProducto3)
+                .fechaHora(LocalDateTime.now().plusHours(5))
+                .meGustas(new ArrayList<>())
+                .build();
+
+        newProducto.agregarComentario(newComentario);
+        newProducto.agregarComentario(newComentario2);
+        newProducto.agregarComentario(newComentario3);
+        marketPlace.getListProductos().add(newProducto);
+        marketPlace.getListProductos().add(newProducto2);
+        marketPlace.getListProductos().add(newProducto3);
+        marketPlace.getListVendedores().add(autorComentario);
+        marketPlace.getListVendedores().add(autorComentario2);
+        marketPlace.getListVendedores().add(autorComentario3);
+        marketPlace.getListComentarios().add(newComentario);
+        marketPlace.getListComentarios().add(newComentario2);
+        marketPlace.getListComentarios().add(newComentario3);
+
         return marketPlace;
     }
 

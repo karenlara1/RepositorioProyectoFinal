@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyectofinal.model;
 
 import co.edu.uniquindio.proyectofinal.model.builder.Persona;
+import co.edu.uniquindio.proyectofinal.model.builder.ProductoBuilder;
+import co.edu.uniquindio.proyectofinal.model.builder.UsuarioBuilder;
 
 public class Usuario {
 
@@ -13,6 +15,8 @@ public class Usuario {
         this.contrasena = contrasena;
         this.persona = persona;
     }
+
+    public static UsuarioBuilder builder(){ return new UsuarioBuilder(); }
 
     public String getUsuario(){
         return usuario;

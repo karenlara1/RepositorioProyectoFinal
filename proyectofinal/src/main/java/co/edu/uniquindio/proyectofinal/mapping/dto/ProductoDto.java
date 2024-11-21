@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyectofinal.mapping.dto;
 
 import co.edu.uniquindio.proyectofinal.model.Comentario;
 import co.edu.uniquindio.proyectofinal.model.EstadoProducto;
+import co.edu.uniquindio.proyectofinal.model.Vendedor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public record ProductoDto(
         double precio,
         EstadoProducto estadoProducto,
         LocalDateTime fechaHoraPublicacion,
-        List<Comentario> comentarios
+        List<Comentario> comentarios,
+        Vendedor vendedor
 ) {
 }

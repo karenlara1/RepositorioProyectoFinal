@@ -15,9 +15,10 @@ public class Producto {
     private EstadoProducto estadoProducto;
     private LocalDateTime fechaHoraPublicacion;
     private List<Comentario> comentarios;
+    private Vendedor vendedor;
 
 
-    public Producto(String idProducto, String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto, LocalDateTime fechaHoraPublicacion, List<Comentario> comentarios) {
+    public Producto(String idProducto, String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto, LocalDateTime fechaHoraPublicacion, List<Comentario> comentarios, Vendedor vendedor) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -26,6 +27,7 @@ public class Producto {
         this.estadoProducto = estadoProducto;
         this.fechaHoraPublicacion = fechaHoraPublicacion;
         this.comentarios = new ArrayList<>();
+        this.vendedor = vendedor;
     }
 
     public static ProductoBuilder builder() {
@@ -79,6 +81,10 @@ public class Producto {
     public LocalDateTime getFechaHoraPublicacion() {
         return fechaHoraPublicacion;
     }
+
+    public Vendedor getVendedor() { return vendedor; }
+
+    public void setVendedor(Vendedor vendedor) { this.vendedor = vendedor; }
 
     public void setFechaHoraPublicacion(LocalDateTime fechaPublicacion) {
         this.fechaHoraPublicacion = fechaHoraPublicacion;

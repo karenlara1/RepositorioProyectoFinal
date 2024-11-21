@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyectofinal.model.builder;
 import co.edu.uniquindio.proyectofinal.model.Comentario;
 import co.edu.uniquindio.proyectofinal.model.EstadoProducto;
 import co.edu.uniquindio.proyectofinal.model.Producto;
+import co.edu.uniquindio.proyectofinal.model.Vendedor;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +17,7 @@ public class ProductoBuilder {
     protected EstadoProducto estadoProducto;
     protected LocalDateTime fechaPublicacion;
     protected List<Comentario> comentarios;
+    protected Vendedor vendedor;
 
     public ProductoBuilder idProducto(String idProducto) {
         this.idProducto = idProducto;
@@ -56,5 +58,10 @@ public class ProductoBuilder {
         return this;
     }
 
-    public Producto build(){ return new Producto(idProducto, nombre, imagen, categoria, precio, estadoProducto, fechaPublicacion, comentarios); }
+    public ProductoBuilder vendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+        return this;
+    }
+
+    public Producto build(){ return new Producto(idProducto, nombre, imagen, categoria, precio, estadoProducto, fechaPublicacion, comentarios, vendedor); }
 }

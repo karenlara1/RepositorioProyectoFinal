@@ -33,7 +33,6 @@ public class MarketPlaceMappinglmpl implements IMarketPlaceMapping {
                 comentario.getContenido(),
                 comentario.getAutor(),
                 comentario.getFechaHora()
-
         );
     }
 
@@ -70,7 +69,8 @@ public class MarketPlaceMappinglmpl implements IMarketPlaceMapping {
                 producto.getPrecio(),
                 producto.getEstadoProducto(),
                 producto.getFechaHoraPublicacion(),
-                producto.getComentarios()
+                producto.getComentarios(),
+                producto.getVendedor()
         );
     }
 
@@ -84,6 +84,7 @@ public class MarketPlaceMappinglmpl implements IMarketPlaceMapping {
                 .estadoProducto(productoDto.estadoProducto())
                 .fechaPublicacion(productoDto.fechaHoraPublicacion())
                 .comentarios(productoDto.comentarios())
+                .vendedor(productoDto.vendedor())
                 .build();
     }
 
