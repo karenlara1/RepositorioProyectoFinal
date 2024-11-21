@@ -29,6 +29,11 @@ public class LogInViewController {
     @FXML
     public void iniciarSesion() {
 
+        if (txtUsuario == null || txtContrasena == null) {
+            showAlert("Error", "Los campos no están correctamente inicializados.");
+            return;
+        }
+
         String usuario = txtUsuario.getText();
         String contrasena = txtContrasena.getText();
 
@@ -40,10 +45,10 @@ public class LogInViewController {
             //Se muestra la vista correspondiente al rol
             switch (rol){
                 case "ADMIN":
-                    loadView("adminView.fxml");//Aún no está la vista
+                    loadView("/adminView.fxml");//Aún no está la vista
                     break;
                 case "VENDEDOR":
-                    loadView("muro-view.fxml"); //Aún no está la vista
+                    loadView("/muro2.fxml"); //Aún no está la vista
                     break;
             }
         }
