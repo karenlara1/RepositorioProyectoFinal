@@ -27,7 +27,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <PasswordField fx:id="txtContraseña" layoutX="166.0" layoutY="155.0" prefHeight="25.0" prefWidth="169.0" />
+      <PasswordField fx:id="txtContrasena" layoutX="166.0" layoutY="155.0" prefHeight="25.0" prefWidth="169.0" />
       <Button fx:id="btnIngresar" layoutX="200.0" layoutY="206.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Ingresar" textFill="#008cff">
          <cursor>
             <Cursor fx:constant="HAND" />
