@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyectofinal.model;
 
 import co.edu.uniquindio.proyectofinal.model.builder.ProductoBuilder;
+import co.edu.uniquindio.proyectofinal.service.observer.IObserver;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Producto implements Cloneable{
     private List<Comentario> comentarios;
     private Vendedor vendedor;
     private int meGustas;
+    private List<IObserver> observadores;
 
 
     public Producto(String idProducto, String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto, LocalDateTime fechaHoraPublicacion, List<Comentario> comentarios, Vendedor vendedor) {
@@ -30,6 +32,7 @@ public class Producto implements Cloneable{
         this.comentarios = new ArrayList<>();
         this.vendedor = vendedor;
         this.meGustas = 0;
+        this.observadores = new ArrayList<>();
     }
 
     public static ProductoBuilder builder() {
@@ -106,12 +109,30 @@ public class Producto implements Cloneable{
 
     public void cambiarEstado(){}
 
+    // Método que incrementara los me gustas
     public void incrementarMeGustas() {
         this.meGustas++;
+        notificarObservadores("incremento_me_gustas");
     }
 
+    //Método que reiniciara el contador de me gustas
     public void reiniciarMeGustas() {
         this.meGustas = 0;
+    }
+
+    // Métodos para manejar observadores
+    public void registrarObservador(IObserver observador) {
+        this.observadores.add(observador);
+    }
+
+    public void eliminarObservador(IObserver observador) {
+        this.observadores.remove(observador);
+    }
+
+    private void notificarObservadores(String evento) {
+        for (IObserver observador : observadores) {
+            observador.actualizar(this, evento);
+        }
     }
 
     // Implementación del método clone()
