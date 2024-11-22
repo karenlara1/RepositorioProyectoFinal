@@ -86,6 +86,17 @@ public class PatronesVistaViewController {
     @FXML
     void onMostrarPrototype(ActionEvent event) {
 
+        Producto producto = Producto.builder().nombre("prueba").idProducto("123").estadoProducto(EstadoProducto.PUBLICADO).fechaPublicacion(LocalDateTime.now()).build();
+        Producto productoClonado = producto.clone();
+        productoClonado.cambiarEstado(EstadoProducto.VENDIDO);
+        System.out.println("Producto Base: " + producto);
+        System.out.println("Producto Clonado: " + productoClonado);
+
+    }
+
+    @FXML
+    void onMostrarPrototypeBuilder(ActionEvent event) {
+
         Usuario usuario = Usuario.builder().usuario("ZM").build();
         Persona.PersonaBuilder personaBuilder = new Persona.PersonaBuilder()
                 .nombre("Juan")
@@ -103,17 +114,6 @@ public class PatronesVistaViewController {
 
         System.out.println("Producto base: " + producto);
         System.out.println("Producto clonado: " + productoClonado);
-
-    }
-
-    @FXML
-    void onMostrarPrototypeBuilder(ActionEvent event) {
-
-        Producto producto = Producto.builder().nombre("prueba").idProducto("123").estadoProducto(EstadoProducto.PUBLICADO).fechaPublicacion(LocalDateTime.now()).build();
-        Producto productoClonado = producto.clone();
-        productoClonado.cambiarEstado(EstadoProducto.VENDIDO);
-        System.out.println("Producto Base: " + producto);
-        System.out.println("Producto Clonado: " + productoClonado);
 
     }
 
