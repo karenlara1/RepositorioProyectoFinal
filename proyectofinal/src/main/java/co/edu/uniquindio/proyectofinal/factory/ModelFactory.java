@@ -123,6 +123,7 @@ public class ModelFactory  implements IModelFactoryService {
 
         Usuario newUsuario = Usuario.builder()
                 .usuario("ZM")
+                .contrasena("123")
                 .build();
 
         Usuario newUsuario2 = Usuario.builder()
