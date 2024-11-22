@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Producto {
+public class Producto implements Cloneable{
     private String idProducto;
     private String nombre;
     private String imagen;
@@ -16,6 +16,7 @@ public class Producto {
     private LocalDateTime fechaHoraPublicacion;
     private List<Comentario> comentarios;
     private Vendedor vendedor;
+    private int meGustas;
 
 
     public Producto(String idProducto, String nombre, String imagen, String categoria, double precio, EstadoProducto estadoProducto, LocalDateTime fechaHoraPublicacion, List<Comentario> comentarios, Vendedor vendedor) {
@@ -28,6 +29,7 @@ public class Producto {
         this.fechaHoraPublicacion = fechaHoraPublicacion;
         this.comentarios = new ArrayList<>();
         this.vendedor = vendedor;
+        this.meGustas = 0;
     }
 
     public static ProductoBuilder builder() {
@@ -86,6 +88,10 @@ public class Producto {
 
     public void setVendedor(Vendedor vendedor) { this.vendedor = vendedor; }
 
+    public int getMeGustas() { return meGustas; }
+
+    public void setMeGustas(int meGustas) { this.meGustas = meGustas; }
+
     public void setFechaHoraPublicacion(LocalDateTime fechaPublicacion) {
         this.fechaHoraPublicacion = fechaHoraPublicacion;
     }
@@ -100,6 +106,24 @@ public class Producto {
 
     public void cambiarEstado(){}
 
+    public void incrementarMeGustas() {
+        this.meGustas++;
+    }
+
+    public void reiniciarMeGustas() {
+        this.meGustas = 0;
+    }
+
+    // Implementación del método clone()
+    @Override
+    public Producto clone() {
+        try {
+            return (Producto) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Error al clonar el producto", e);
+        }
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -111,6 +135,8 @@ public class Producto {
                 ", estadoProducto=" + estadoProducto +
                 ", fechaHoraPublicacion=" + fechaHoraPublicacion +
                 ", comentarios=" + comentarios +
+                ", vendedor=" + vendedor +
+                ", meGustas=" + meGustas +
                 '}';
     }
 }

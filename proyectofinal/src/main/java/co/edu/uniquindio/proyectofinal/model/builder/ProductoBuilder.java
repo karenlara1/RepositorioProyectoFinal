@@ -6,9 +6,10 @@ import co.edu.uniquindio.proyectofinal.model.Producto;
 import co.edu.uniquindio.proyectofinal.model.Vendedor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProductoBuilder {
+public class ProductoBuilder implements Cloneable {
     protected String idProducto;
     protected String nombre;
     protected String imagen;
@@ -64,4 +65,17 @@ public class ProductoBuilder {
     }
 
     public Producto build(){ return new Producto(idProducto, nombre, imagen, categoria, precio, estadoProducto, fechaPublicacion, comentarios, vendedor); }
+
+    // Implementación del método clone() para el patrón Prototype
+    @Override
+    public ProductoBuilder clone() {
+        try {
+            ProductoBuilder cloned = (ProductoBuilder) super.clone();
+            // Clonar listas y objetos para evitar referencias compartidas
+            cloned.comentarios = this.comentarios != null ? new ArrayList<>(this.comentarios) : null;
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Error al clonar el ProductoBuilder", e);
+        }
+    }
 }

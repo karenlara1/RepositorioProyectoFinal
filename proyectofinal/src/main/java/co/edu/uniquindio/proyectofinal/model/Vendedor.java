@@ -10,6 +10,8 @@ public class Vendedor extends Persona {
     private List<Producto> productos;
     private List<Vendedor> aliados;
     private List<Vendedor> contactos;
+    private final int numeroMaxContactos = 10;
+    private List<Mensaje> mensajesEnviados;
     public Vendedor(PersonaBuilder builder) {
         super(builder);
         this.productos = productos;
@@ -67,6 +69,11 @@ public class Vendedor extends Persona {
             return false;
         }
 
+        if (contactos.size() >= numeroMaxContactos) {
+            System.out.println("No se pueden agregar más contactos. Límite alcanzado.");
+            return false;
+        }
+
         // Agregar el contacto a la lista
         contactos.add(nuevoContacto);
         // Agregar recíprocamente
@@ -75,4 +82,17 @@ public class Vendedor extends Persona {
         System.out.println("Contacto agregado con éxito.");
         return true;
     }
+
+    //Método para ver la cantidad de mensajes enviados entre dos vendedores
+    public int contarMensajesEnviadosA(Vendedor destinatario) {
+        return (int) this.mensajesEnviados.stream()
+                .filter(mensaje -> mensaje.getDestinatario().equals(destinatario))
+                .count();
+    }
+
+    //Método para contar la cantidad de productos publicados por un vendedor especifico
+    public int contarProductosPublicados() {
+        return this.productos.size();
+    }
+
 }
