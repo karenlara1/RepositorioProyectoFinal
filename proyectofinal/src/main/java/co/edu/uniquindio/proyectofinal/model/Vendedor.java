@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyectofinal.model;
 import co.edu.uniquindio.proyectofinal.model.builder.Persona;
 import co.edu.uniquindio.proyectofinal.model.builder.ProductoBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vendedor extends Persona {
@@ -14,9 +15,9 @@ public class Vendedor extends Persona {
     private List<Mensaje> mensajesEnviados;
     public Vendedor(PersonaBuilder builder) {
         super(builder);
-        this.productos = productos;
-        this.aliados = aliados;
-        this.contactos = contactos;
+        this.productos = new ArrayList<>();
+        this.aliados = new ArrayList<>();
+        this.contactos = new ArrayList<>();
     }
 
     public List<Producto> getProductos() {
@@ -83,16 +84,11 @@ public class Vendedor extends Persona {
         return true;
     }
 
-    //Método para ver la cantidad de mensajes enviados entre dos vendedores
+    //Metodo para ver la cantidad de mensajes enviados entre dos vendedores
     public int contarMensajesEnviadosA(Vendedor destinatario) {
         return (int) this.mensajesEnviados.stream()
                 .filter(mensaje -> mensaje.getDestinatario().equals(destinatario))
                 .count();
-    }
-
-    //Método para contar la cantidad de productos publicados por un vendedor especifico
-    public int contarProductosPublicados() {
-        return this.productos.size();
     }
 
 }
