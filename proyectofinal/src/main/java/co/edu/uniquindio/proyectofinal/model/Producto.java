@@ -107,7 +107,10 @@ public class Producto implements Cloneable{
         this.comentarios.add(comentario);
     }
 
-    public void cambiarEstado(){}
+    public void cambiarEstado(EstadoProducto nuevoEstado){
+        this.estadoProducto = nuevoEstado;
+        notificarObservadores("cambio_estado");
+    }
 
     // Método que incrementara los me gustas
     public void incrementarMeGustas() {
